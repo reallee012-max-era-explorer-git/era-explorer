@@ -10,33 +10,63 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DynastyIdRouteImport } from './routes/dynasty.$id'
+import { Route as EventIdRouteImport } from './routes/event.$id'
+import { Route as PersonIdRouteImport } from './routes/person.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DynastyIdRoute = DynastyIdRouteImport.update({
+  id: '/dynasty/$id',
+  path: '/dynasty/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventIdRoute = EventIdRouteImport.update({
+  id: '/event/$id',
+  path: '/event/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PersonIdRoute = PersonIdRouteImport.update({
+  id: '/person/$id',
+  path: '/person/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/dynasty/$id': typeof DynastyIdRoute
+  '/event/$id': typeof EventIdRoute
+  '/person/$id': typeof PersonIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/dynasty/$id': typeof DynastyIdRoute
+  '/event/$id': typeof EventIdRoute
+  '/person/$id': typeof PersonIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/dynasty/$id': typeof DynastyIdRoute
+  '/event/$id': typeof EventIdRoute
+  '/person/$id': typeof PersonIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/dynasty/$id' | '/event/$id' | '/person/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/dynasty/$id' | '/event/$id' | '/person/$id'
+  id: '__root__' | '/' | '/dynasty/$id' | '/event/$id' | '/person/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DynastyIdRoute: typeof DynastyIdRoute
+  EventIdRoute: typeof EventIdRoute
+  PersonIdRoute: typeof PersonIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +78,35 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dynasty/$id': {
+      id: '/dynasty/$id'
+      path: '/dynasty/$id'
+      fullPath: '/dynasty/$id'
+      preLoaderRoute: typeof DynastyIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/event/$id': {
+      id: '/event/$id'
+      path: '/event/$id'
+      fullPath: '/event/$id'
+      preLoaderRoute: typeof EventIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/person/$id': {
+      id: '/person/$id'
+      path: '/person/$id'
+      fullPath: '/person/$id'
+      preLoaderRoute: typeof PersonIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DynastyIdRoute: DynastyIdRoute,
+  EventIdRoute: EventIdRoute,
+  PersonIdRoute: PersonIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
