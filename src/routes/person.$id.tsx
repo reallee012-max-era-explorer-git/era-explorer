@@ -36,7 +36,7 @@ export const Route = createFileRoute("/person/$id")({
   component: PersonDetail,
 });
 
-function RelationBlock({ label, tags }: { label: string; tags?: RelationTag[] }) {
+function RelationBlock({ label, tags }: { label: string; tags?: RelationTag[] | undefined }) {
   if (!tags?.length) return null;
   return (
     <div className="mb-3">

@@ -12,7 +12,13 @@ export function RegionChip({ region }: { region: Region }) {
   return <span className={`chip-region ${regionClass[region]}`}>{regionLabel[region]}</span>;
 }
 
-export function EventCard({ event, compact = false }: { event: HistoryEvent; compact?: boolean }) {
+export function EventCard({
+  event,
+  compact = false,
+}: {
+  event: HistoryEvent;
+  compact?: boolean | undefined;
+}) {
   return (
     <Link
       to="/event/$id"
@@ -67,7 +73,7 @@ export function Section({
   children,
 }: {
   title: string;
-  icon?: string;
+  icon?: string | undefined;
   children: React.ReactNode;
 }) {
   return (
@@ -81,7 +87,13 @@ export function Section({
   );
 }
 
-export function BulletList({ items, tone }: { items: string[]; tone?: "good" | "bad" }) {
+export function BulletList({
+  items,
+  tone,
+}: {
+  items: string[];
+  tone?: "good" | "bad" | undefined;
+}) {
   const dot = tone === "good" ? "•" : tone === "bad" ? "•" : "•";
   return (
     <ul className="space-y-1.5">
@@ -105,7 +117,15 @@ export function BulletList({ items, tone }: { items: string[]; tone?: "good" | "
   );
 }
 
-export function TagLink({ personId, name, note }: { personId?: string; name: string; note?: string }) {
+export function TagLink({
+  personId,
+  name,
+  note,
+}: {
+  personId?: string | undefined;
+  name: string;
+  note?: string | undefined;
+}) {
   const label = (
     <>
       {name}

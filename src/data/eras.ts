@@ -53,7 +53,8 @@ export const eras: Era[] = [
 ];
 
 export function eraOfYear(year: number): Era {
-  return eras.find((e) => year >= e.startYear && year <= e.endYear) ?? eras[0];
+  const found = eras.find((e) => year >= e.startYear && year <= e.endYear);
+  return found ?? (eras[0] as Era);
 }
 
 export function formatYear(year: number): string {
